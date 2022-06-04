@@ -1,0 +1,230 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/api/"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "name": "Authorization",
+        "scheme": "bearer",
+        "in": "header"
+      }
+    }
+  },
+  "tags": {},
+  "paths": {
+    "/Auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "description": "",
+        "requestBody": {
+          "description": "test",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "default": "malikkorucu@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "default": "1234"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Product/products": {
+      "get": {
+        "tags": ["Product"],
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "skip",
+            "type": "number",
+            "required": false,
+            "in": "query",
+            "default": 0
+          },
+          {
+            "name": "limit",
+            "type": "number",
+            "required": false,
+            "in": "query",
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Product"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "productIds",
+            "in": "query",
+            "minItems": 1,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Product/productsByCategory": {
+      "get": {
+        "tags": ["Product"],
+        "description": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "skip",
+            "type": "number",
+            "required": false,
+            "in": "query",
+            "default": 0
+          },
+          {
+            "name": "limit",
+            "type": "number",
+            "required": false,
+            "in": "query",
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Product/product/{id}": {
+      "get": {
+        "tags": ["Product"],
+        "description": "Example product id : 62927bee40c0a9002dc79579",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Product/product": {
+      "post": {
+        "tags": ["Product"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "test",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "required": true
+                  },
+                  "price": {
+                    "type": "integer",
+                    "required": true
+                  },
+                  "price_with_discount": {
+                    "type": "integer",
+                    "required": true
+                  },
+                  "category": {
+                    "type": "string",
+                    "default": ""
+                  },
+                  "description": {
+                    "type": "string",
+                    "default": ""
+                  },
+                  "image": {
+                    "type": "file",
+                    "default": ""
+                  }
+                }
+              },
+              "examples": {
+                "ExampleBody": {
+                  "value": {
+                    "email": "malikkorucu@gmail.com",
+                    "password": "1234"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}

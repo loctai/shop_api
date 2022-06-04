@@ -1,0 +1,59 @@
+{
+  "openapi":"3.0.0",
+  "info": {
+    "title": "BEAUTY CENTER API DOCUMENT",
+    "description": "",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Auth/register": {
+      "post": {
+        "operationId": "index",
+        "tags": ["Auth"],
+        "description": "Register",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "name",
+            "type": "string",
+            "required": "true"
+          },
+          {
+            "name": "email",
+            "in": "email",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "password",
+            "type": "string",
+            "required": "true"
+          },
+          {
+            "name": "re_password",
+            "in": "re_password",
+            "type": "string",
+            "required": "true"
+          },
+          {
+            "name": "phone",
+            "in": "phone",
+            "type": "number",
+            "required": "true"
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/bar": {
+      "get": {
+        "operationId": "impossible",
+        "tags": ["/test"],
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    }
+  }
+}
